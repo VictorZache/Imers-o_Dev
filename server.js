@@ -1,46 +1,23 @@
-import express from "express";
+import express from "express"; // Import Express framework
+import routes from "./src/routes/postsRoutes.js";
 
-const posts = [
-    {
-        id: 1,
-        desc: "Uma foto",
-        image: "https://placecats.com/millie/300/150"
-    },
-    {
-        id: 2,
-        desc: "Uma foto",
-        image: "https://placecats.com/millie/300/150"
-    },
-    {
-        id: 3,
-        desc: "Uma foto",
-        image: "https://placecats.com/millie/300/150"
-    }
-];
+// **Optional (if not using a database):**
+// const posts = [  // Array of mock posts (comment out if using database)
+//     {
+//         id: 1,
+//         desc: "Uma foto",
+//         image: "https://placecats.com/millie/300/150"
+//     },
+//     // ... more posts
+// ];
 
-const app = express();
+const app = express(); // Create an Express application instance
+routes (app)
 
-app.use (express.json());
 
+// Start the server and listen on port 3000
 app.listen(3000, () => {
-    console.log("Servido esta ouvindo.");
-    
+  console.log("Servidor está ouvindo na porta 3000."); // Log message in Portuguese
 });
 
-app.get("/posts", (req, res) => {
-    res.status(200).json(posts);
-});
-
-function buscarPostPorID(id) {
-    return posts.findIndex((post) => {
-        return post.id === Number(id)
-    })
-}
-
-app.get("/posts/:id", (req, res) => {
-    const index = buscarPostPorID(req.params.id)
-    res.status(200).json(posts[index]);
-
-});
-
-
+// **Database-driven route:**
